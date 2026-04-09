@@ -9,6 +9,13 @@
 * Paid orders shown on same page
 
 ---
+## Flow chosen
+Stripe Checkout was chosen because It handles UI, validation, and payment flow automatically with Built-in support for error handling and retries
+## avoiding double charge / inconsistent state
+The system relies on Stripe webhooks to confirm successful payments 
+The frontend redirect is NOT trusted. 
+Order is marked as paid only after Stripe confirms via webhook
+Each order stores a unique stripe_session_id, which  Prevents duplicate updates for the same payment  
 
 ## Flow
 
@@ -58,3 +65,9 @@ stripe listen --forward-to localhost:8000/webhook/
 ## Test Card
 
 `4242 4242 4242 4242`
+
+## AI-assist
+Fixed syntax, imported libraries and docker file through help of Codex
+
+## Time Spent
+11 hours 
