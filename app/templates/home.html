@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shop</title>
+</head>
+<body>
+
+<h1>Products</h1>
+
+<form method="POST" action="/checkout/">
+    {% csrf_token %}
+
+    {% for p in products %}
+        <div>
+            <h3>{{ p.name }}</h3>
+            <p>₹{{ p.price }}</p>
+            <input type="number" name="qty_{{ p.id }}" min="0" value="0">
+        </div>
+    {% endfor %}
+
+    <button onclick="this.disabled=true; this.form.submit();">Buy</button>
+</form>
+
+<hr>
+
+<h2>My Orders</h2>
+
+{% for order in orders %}
+    <div>
+        <h4>Order #{{ order.id }}</h4>
+        <ul>
+            {% for item in order.orderitem_set.all %}
+                <li>{{ item.product.name }} x {{ item.quantity }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endfor %}
+
+</body>
+</html>
